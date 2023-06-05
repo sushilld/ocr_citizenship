@@ -23,11 +23,10 @@ def tab2(uploaded_front):
     st.header("Uploaded Front OCR")
     col1, col2 = st.columns(2, gap="large")
 
-    # Add the image to the first column
-    if st.session_state['front_ocr'] == None:
+    if 'front_ocr' not in st.session_state:
         with st.spinner('Wait for it...'):
             response_text = requestURL("http://192.168.41.111:6011/uploadDocument/front/", st.session_state['uploaded_front'])
-            st.session_state['front_ocr']
+            st.session_state['front_ocr'] = response_text
         if response_text['CardValidation'] is False:
             st.error("Citizenship Front is not valid. Try again")
     else:
@@ -78,16 +77,26 @@ def tab2(uploaded_front):
 def tab3(uploaded_back):
     st.header("Uploaded Back OCR")
     col1, col2 = st.columns(2, gap="large")
-    if st.session_state['back_ocr'] == None:
+    # if st.session_state['back_ocr'] == None:
+    if 'back_ocr' not in st.session_state:
         with st.spinner('Wait for it...'):
-            response_text = requestURL("http://192.168.41.111:6011/uploadDocument/back/")
+            response_text = requestURL("http://192.168.41.111:6011/uploadDocument/back/", st.session_state['uploaded_back'])
+            st.session_state['back_ocr'] = response_text
         if response_text['CardValidation'] is False:
-            st.error("Citizenship Front is not valid. Try again")
+            st.error("Citizenship Back is not valid. Try again")
     else:
         response_text = st.session_state['back_ocr']
     # Add the image to the first column
+    citizenship_number = response_text['Info']['CitizenshipNumber']
+    name = response_text['Info']['FullName']
+    gender = response_text['Info']['Gender']
+    birthdate = response_text['Info']['BirthDate']
+    birthplace = response_text['Info']['BirthPlace']
+    permanent_address = response_text['Info']['PermanentAddress']
+    issue_d = response_text['Info']['IssueDate'],
+    finger_print = response_text['FingerPrintStatus']
     with col1:
-        st.subheader("Citizenship Front View")
+        st.subheader("Citizenship Back View")
         st.image(uploaded_back, use_column_width=True)
 
     # Add the description to the second column
@@ -95,7 +104,24 @@ def tab3(uploaded_back):
         st.subheader("Citizenship OCR finding with :blue[fields]")
         
         with st.container():
-            st.write("This is a description of the image.")
+            data = {
+                "CitizenshipNumber": [citizenship_number],
+                "FullName": [name],
+                "Gender": [gender],
+                "BirthDate": [birthdate],
+                "BirthPlace_District": [birthplace['District']],
+                # "BirthPlace_Sub-Metropolitan": [birthplace['Sub-Metropolitan']],
+                "BirthPlace_WardNumber": [birthplace['WardNumber']],
+                "PermanentAddress_District": [permanent_address['District']],
+                "PermanentAddress_WardNumber": [permanent_address['WardNumber']],
+                "IssueDate": [''.join(issue_d)],
+                "FingerPrint": [finger_print]
+            }
+
+            df = pd.DataFrame(data)
+            df = df.reset_index(drop=True)
+            df.index = ["Values"]
+            st.table(df.transpose())
         
     st.write("---")
     
@@ -103,28 +129,30 @@ def tab3(uploaded_back):
     st.caption('The Full text extracted using OCR :red[without fields]')
     
     with st.container():
-        st.write("This is a description of the image.")
+        st.write(response_text['Info']['ExtractedText'])
     
     
 
 def tab4(uploaded_front):
     st.header("Uploaded Front OCR")
     col1, col2 = st.columns(2, gap="large")
-    if st.session_state['google_front_ocr'] == None:
+    # if st.session_state['google_front_ocr'] == None:
+    if 'google_front_ocr' not in st.session_state:
         with st.spinner('Wait for it...'):
-            response_text = requestURL("http://192.168.50.177:6011/uploadDocument-Google/front/")
+            response_text = requestURL("http://192.168.41.111:6011/uploadDocument-Google/front/", st.session_state['uploaded_front'])
+            st.session_state['google_front_ocr'] = response_text
         if response_text['CardValidation'] is False:
             st.error("Citizenship Front is not valid. Try again")
     else:
         response_text = st.session_state['google_front_ocr']
-    citizenship_number = response_text['CitizenshipNumber']
-    name = response_text['FullName']
-    gender = response_text['Gender']
-    birthdate = response_text['BirthDate']
-    father_name = response_text['FatherName']
-    mother_name = response_text['MotherName']
-    birthplace = response_text['BirthPlace']
-    permanent_address = response_text['PermanentAddress']
+    citizenship_number = response_text['Info']['CitizenshipNumber']
+    name = response_text['Info']['FullName']
+    gender = response_text['Info']['Gender']
+    birthdate = response_text['Info']['BirthDate']
+    father_name = response_text['Info']['FatherName']
+    mother_name = response_text['Info']['MotherName']
+    birthplace = response_text['Info']['BirthPlace']
+    permanent_address = response_text['Info']['PermanentAddress']
     # Add the image to the first column
     with col1:
         st.subheader("Citizenship Front View")
@@ -135,7 +163,23 @@ def tab4(uploaded_front):
         st.subheader("Citizenship OCR finding with :blue[fields]")
         
         with st.container():
-            st.write("This is a description of the image.")
+            data = {
+                "CitizenshipNumber": [citizenship_number],
+                "FullName": [name],
+                "Gender": [gender],
+                "BirthDate": [birthdate],
+                "FatherName": [father_name],
+                "MotherName": [mother_name],
+                "BirthPlace_District": [birthplace['District']],
+                "BirthPlace_WardNumber": [birthplace['WardNumber']],
+                "PermanentAddress_District": [permanent_address['District']],
+                "PermanentAddress_WardNumber": [permanent_address['WardNumber']]
+            }
+
+            df = pd.DataFrame(data)
+            df = df.reset_index(drop=True)
+            df.index = ["Values"]
+            st.table(df.transpose())
         
     st.write("---")
     
@@ -143,20 +187,31 @@ def tab4(uploaded_front):
     st.caption('The Full text extracted using OCR :red[without fields]')
     
     with st.container():
-        st.write("This is a description of the image.")
+        st.write(response_text['Info']['ExtractedText'])
         
         
 def tab5(uploaded_back):
     st.header("Uploaded back OCR")
     col1, col2 = st.columns(2, gap="large")
-    if st.session_state['google_back_ocr'] == None:
+    # if st.session_state['google_back_ocr'] == None:
+    if 'google_back_ocr' not in st.session_state:
         with st.spinner('Wait for it...'):
-            response_text = requestURL("http://192.168.50.177:6011/uploadDocument-Google/back/")
+            response_text = requestURL("http://192.168.41.111:6011/uploadDocument-Google/back/", st.session_state['uploaded_back'])
+            st.session_state['google_back_ocr'] = response_text
         if response_text['CardValidation'] is False:
             st.error("Citizenship Front is not valid. Try again")
     else:
         response_text = st.session_state['google_back_ocr']
     # Add the image to the first column
+    citizenship_number = response_text['Info']['CitizenshipNumber']
+    name = response_text['Info']['FullName']
+    gender = response_text['Info']['Gender']
+    birthdate = response_text['Info']['BirthDate']
+    birthplace = response_text['Info']['BirthPlace']
+    permanent_address = response_text['Info']['PermanentAddress']
+    issue_d = response_text['Info']['IssueDate']
+    finger_print = response_text['FingerPrintStatus']
+    
     with col1:
         st.subheader("Citizenship Front View")
         st.image(uploaded_back, use_column_width=True)
@@ -166,7 +221,24 @@ def tab5(uploaded_back):
         st.subheader("Citizenship OCR finding with :blue[fields]")
         
         with st.container():
-            st.write("This is a description of the image.")
+            data = {
+                "CitizenshipNumber": [citizenship_number],
+                "FullName": [name],
+                "Gender": [gender],
+                "BirthDate": [birthdate],
+                "BirthPlace_District": [birthplace['District']],
+                # "BirthPlace_Sub-Metropolitan": [birthplace['Sub-Metropolitan']],
+                "BirthPlace_WardNumber": [birthplace['WardNumber']],
+                "PermanentAddress_District": [permanent_address['District']],
+                "PermanentAddress_WardNumber": [permanent_address['WardNumber']],
+                "IssueDate": [''.join(issue_d)],
+                "FingerPrint": [finger_print]
+            }
+
+            df = pd.DataFrame(data)
+            df = df.reset_index(drop=True)
+            df.index = ["Values"]
+            st.table(df.transpose())
         
     st.write("---")
     
@@ -174,7 +246,7 @@ def tab5(uploaded_back):
     st.caption('The Full text extracted using OCR :red[without fields]')
     
     with st.container():
-        st.write("This is a description of the image.")
+        st.write(response_text['Info']['ExtractedText'])
 
 # Main app
 def main():
@@ -187,7 +259,7 @@ def main():
         home_tab()
     elif selected_tab == "Front OCR":
         uploaded_front = st.session_state.get("uploaded_front")
-        print(uploaded_front)
+        print(uploaded_front.name)
         if uploaded_front is None :
             st.error("Please upload both the citizenship front and back.")
         else:
@@ -212,9 +284,9 @@ def main():
             tab5(uploaded_back)
 
 if __name__ == "__main__":
-    st.session_state['front_ocr'] = None
-    st.session_state['back_ocr'] = None
-    st.session_state['google_front_ocr'] = None
-    st.session_state['google_back_ocr'] = None
+    # st.session_state['front_ocr'] = None
+    # st.session_state['back_ocr'] = None
+    # st.session_state['google_front_ocr'] = None
+    # st.session_state['google_back_ocr'] = None
     main()
     
