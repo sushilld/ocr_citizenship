@@ -14,13 +14,16 @@ def home_tab():
         else:
             st.error("Please upload both the citizenship front and back.")
 
-def tab2():
+def tab2(uploaded_front):
     st.write("This is the second tab.")
 
-def tab3():
+def tab3(uploaded_back):
     st.write("This is the third tab.")
 
-def tab4():
+def tab4(uploaded_front):
+    st.write("This is the fourth tab.")
+
+def tab5(uploaded_back):
     st.write("This is the fourth tab.")
 
 # Main app
@@ -33,32 +36,28 @@ def main():
         home_tab()
     elif selected_tab == "Front OCR":
         uploaded_front = st.session_state.get("uploaded_front")
-        uploaded_back = st.session_state.get("uploaded_back")
         if uploaded_front is None or uploaded_back is None:
             st.error("Please upload both the citizenship front and back.")
         else:
-            tab2()
+            tab2(uploaded_front)
     elif selected_tab == "Back OCR":
-        uploaded_front = st.session_state.get("uploaded_front")
         uploaded_back = st.session_state.get("uploaded_back")
         if uploaded_front is None or uploaded_back is None:
             st.error("Please upload both the citizenship front and back.")
         else:
-            tab3()
+            tab3(uploaded_back)
     elif selected_tab == "Front Google OCR":
         uploaded_front = st.session_state.get("uploaded_front")
-        uploaded_back = st.session_state.get("uploaded_back")
         if uploaded_front is None or uploaded_back is None:
             st.error("Please upload both the citizenship front and back.")
         else:
-            tab4()
+            tab4(uploaded_front)
     elif selected_tab == "Back Google OCR":
-        uploaded_front = st.session_state.get("uploaded_front")
         uploaded_back = st.session_state.get("uploaded_back")
         if uploaded_front is None or uploaded_back is None:
             st.error("Please upload both the citizenship front and back.")
         else:
-            tab4()
+            tab5(uploaded_back)
 
 if __name__ == "__main__":
     main()
