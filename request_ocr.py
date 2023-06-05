@@ -1,7 +1,8 @@
 import requests
+import json
 
-def requestURL(URL):
-    url = "http://192.168.41.111:6011/uploadDocument/front/"
+def requestURL(url):
+    # url = "http://192.168.41.111:6011/uploadDocument/front/"
 
     payload = {}
     files=[
@@ -13,4 +14,6 @@ def requestURL(URL):
 
     response = requests.request("POST", url, headers=headers, data=payload, files=files)
 
-    response.text
+    response_text = json.loads(response.text)
+    
+    return response_text
