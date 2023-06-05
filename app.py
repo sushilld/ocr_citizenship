@@ -3,8 +3,8 @@ import streamlit as st
 def home_tab():
     st.title("OCR Citizenship")
     st.header("Welcome to the OCR Citizenship app!")
-    uploaded_front = st.file_uploader("Upload Citizenship Front", type=["jpg", "jpeg", "png"])
-    uploaded_back = st.file_uploader("Upload Citizenship Back", type=["jpg", "jpeg", "png"])
+    uploaded_front = st.file_uploader("Upload Citizenship Front", type=["jpg", "jpeg", "png"], max_upload_size=10 * 1024 * 1024)
+    uploaded_back = st.file_uploader("Upload Citizenship Back", type=["jpg", "jpeg", "png"], max_upload_size=10 * 1024 * 1024)
 
     if st.button("Submit"):
         if uploaded_front is not None and uploaded_back is not None:
@@ -36,25 +36,25 @@ def main():
         home_tab()
     elif selected_tab == "Front OCR":
         uploaded_front = st.session_state.get("uploaded_front")
-        if uploaded_front is None or uploaded_back is None:
+        if uploaded_front is None :
             st.error("Please upload both the citizenship front and back.")
         else:
             tab2(uploaded_front)
     elif selected_tab == "Back OCR":
         uploaded_back = st.session_state.get("uploaded_back")
-        if uploaded_front is None or uploaded_back is None:
+        if uploaded_back is None:
             st.error("Please upload both the citizenship front and back.")
         else:
             tab3(uploaded_back)
     elif selected_tab == "Front Google OCR":
         uploaded_front = st.session_state.get("uploaded_front")
-        if uploaded_front is None or uploaded_back is None:
+        if uploaded_front is None:
             st.error("Please upload both the citizenship front and back.")
         else:
             tab4(uploaded_front)
     elif selected_tab == "Back Google OCR":
         uploaded_back = st.session_state.get("uploaded_back")
-        if uploaded_front is None or uploaded_back is None:
+        if uploaded_back is None:
             st.error("Please upload both the citizenship front and back.")
         else:
             tab5(uploaded_back)
