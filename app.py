@@ -18,7 +18,57 @@ def home_tab():
 
 def tab2(uploaded_front):
     st.header("Uploaded Front OCR")
-    col1, col2 = st.columns([1, 3])
+    col1, col2 = st.columns(2, gap="large")
+
+    # Add the image to the first column
+    with col1:
+        st.subheader("Citizenship Front View")
+        st.image(uploaded_front, use_column_width=True, width=500)
+
+    # Add the description to the second column
+    with col2:
+        st.subheader("Citizenship OCR finding with :blue[fields]")
+        
+        with st.container():
+            st.write("This is a description of the image.")
+        
+    st.write("---")
+    # Full text extracted from image
+    st.subheader("Extraced text from image")
+    st.caption('The Full text extracted using OCR :red[without fields]')
+    
+    with st.container():
+        st.write("This is a description of the image.")
+
+def tab3(uploaded_back):
+    st.header("Uploaded Back OCR")
+    col1, col2 = st.columns(2, gap="large")
+
+    # Add the image to the first column
+    with col1:
+        st.subheader("Citizenship Front View")
+        st.image(uploaded_back, use_column_width=True)
+
+    # Add the description to the second column
+    with col2:
+        st.subheader("Citizenship OCR finding with :blue[fields]")
+        
+        with st.container():
+            st.write("This is a description of the image.")
+        
+    st.write("---")
+    
+    st.subheader("Extraced text from image")
+    st.caption('The Full text extracted using OCR :red[without fields]')
+    
+    with st.container():
+        st.write("This is a description of the image.")
+    
+    
+
+def tab4(uploaded_front):
+    st.header("Uploaded Front OCR")
+    col1, col2 = st.columns(2, gap="large")
 
     # Add the image to the first column
     with col1:
@@ -27,17 +77,43 @@ def tab2(uploaded_front):
 
     # Add the description to the second column
     with col2:
-        st.subheader("Citizenship OCR finding")
+        st.subheader("Citizenship OCR finding with :blue[fields]")
+        
+        with st.container():
+            st.write("This is a description of the image.")
+        
+    st.write("---")
+    
+    st.subheader("Extraced text from image")
+    st.caption('The Full text extracted using OCR :red[without fields]')
+    
+    with st.container():
         st.write("This is a description of the image.")
-
-def tab3(uploaded_back):
-    st.write("This is the third tab.")
-
-def tab4(uploaded_front):
-    st.write("This is the fourth tab.")
-
+        
+        
 def tab5(uploaded_back):
-    st.write("This is the fourth tab.")
+    st.header("Uploaded back OCR")
+    col1, col2 = st.columns(2, gap="large")
+
+    # Add the image to the first column
+    with col1:
+        st.subheader("Citizenship Front View")
+        st.image(uploaded_back, use_column_width=True)
+
+    # Add the description to the second column
+    with col2:
+        st.subheader("Citizenship OCR finding with :blue[fields]")
+        
+        with st.container():
+            st.write("This is a description of the image.")
+        
+    st.write("---")
+    
+    st.subheader("Extraced text from image")
+    st.caption('The Full text extracted using OCR :red[without fields]')
+    
+    with st.container():
+        st.write("This is a description of the image.")
 
 # Main app
 def main():
