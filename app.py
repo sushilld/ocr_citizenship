@@ -3,8 +3,8 @@ import streamlit as st
 def home_tab():
     st.title("OCR Citizenship")
     st.header("Welcome to the OCR Citizenship app!")
-    uploaded_front = st.file_uploader("Upload Citizenship Front", type=["jpg", "jpeg", "png"], max_upload_size=10 * 1024 * 1024)
-    uploaded_back = st.file_uploader("Upload Citizenship Back", type=["jpg", "jpeg", "png"], max_upload_size=10 * 1024 * 1024)
+    uploaded_front = st.file_uploader("Upload Citizenship Front", type=["jpg", "jpeg", "png"])
+    uploaded_back = st.file_uploader("Upload Citizenship Back", type=["jpg", "jpeg", "png"])
 
     if st.button("Submit"):
         if uploaded_front is not None and uploaded_back is not None:
@@ -61,3 +61,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
