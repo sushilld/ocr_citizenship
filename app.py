@@ -26,26 +26,33 @@ def tab4():
 # Main app
 def main():
     st.sidebar.title("Navigation")
-    tabs = ["Home", "Tab 2", "Tab 3", "Tab 4"]
+    tabs = ["Home", "Front OCR", "Back OCR", "Front Google OCR", "Back Google OCR"]
     selected_tab = st.sidebar.radio("Go to", tabs)
 
     if selected_tab == "Home":
         home_tab()
-    elif selected_tab == "Tab 2":
+    elif selected_tab == "Front OCR":
         uploaded_front = st.session_state.get("uploaded_front")
         uploaded_back = st.session_state.get("uploaded_back")
         if uploaded_front is None or uploaded_back is None:
             st.error("Please upload both the citizenship front and back.")
         else:
             tab2()
-    elif selected_tab == "Tab 3":
+    elif selected_tab == "Back OCR":
         uploaded_front = st.session_state.get("uploaded_front")
         uploaded_back = st.session_state.get("uploaded_back")
         if uploaded_front is None or uploaded_back is None:
             st.error("Please upload both the citizenship front and back.")
         else:
             tab3()
-    elif selected_tab == "Tab 4":
+    elif selected_tab == "Front Google OCR":
+        uploaded_front = st.session_state.get("uploaded_front")
+        uploaded_back = st.session_state.get("uploaded_back")
+        if uploaded_front is None or uploaded_back is None:
+            st.error("Please upload both the citizenship front and back.")
+        else:
+            tab4()
+    elif selected_tab == "Back Google OCR":
         uploaded_front = st.session_state.get("uploaded_front")
         uploaded_back = st.session_state.get("uploaded_back")
         if uploaded_front is None or uploaded_back is None:
