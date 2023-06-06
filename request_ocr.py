@@ -10,9 +10,9 @@ def requestURL(url, image):
     headers = {
     'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTE0Mjk1ODgsImlhdCI6MTY3NTg3NzI4OCwic3ViIjoiZG90bmV0In0.xEZrifwMLBVSyz812yOqxLXuzXfTXgLKchREgYG1J-U'
     }
-
-    response = requests.post(url, headers=headers, data=payload, files=files)
-
-    response_text = response.json()
-    
+    try:
+        response = requests.post(url, headers=headers, data=payload, files=files)
+        response_text = response.json()
+    except:
+        response_text = {'status': 'error', 'message': 'OCR Server is down. Try again later.'}
     return response_text

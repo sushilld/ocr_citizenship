@@ -26,6 +26,9 @@ def tab2(uploaded_front):
     if 'front_ocr' not in st.session_state:
         with st.spinner('Wait for it...'):
             response_text = requestURL("http://192.168.41.111:6011/uploadDocument/front/", st.session_state['uploaded_front'])
+            if 'status' in response_text:
+                st.error(response_text['message'])
+                return
             st.session_state['front_ocr'] = response_text
         if response_text['CardValidation'] is False:
             st.error("Citizenship Front is not valid. Try again")
@@ -81,6 +84,9 @@ def tab3(uploaded_back):
     if 'back_ocr' not in st.session_state:
         with st.spinner('Wait for it...'):
             response_text = requestURL("http://192.168.41.111:6011/uploadDocument/back/", st.session_state['uploaded_back'])
+            if 'status' in response_text:
+                st.error(response_text['message'])
+                return
             st.session_state['back_ocr'] = response_text
         if response_text['CardValidation'] is False:
             st.error("Citizenship Back is not valid. Try again")
@@ -140,6 +146,9 @@ def tab4(uploaded_front):
     if 'google_front_ocr' not in st.session_state:
         with st.spinner('Wait for it...'):
             response_text = requestURL("http://192.168.41.111:6011/uploadDocument-Google/front/", st.session_state['uploaded_front'])
+            if 'status' in response_text:
+                st.error(response_text['message'])
+                return
             st.session_state['google_front_ocr'] = response_text
         if response_text['CardValidation'] is False:
             st.error("Citizenship Front is not valid. Try again")
@@ -197,6 +206,9 @@ def tab5(uploaded_back):
     if 'google_back_ocr' not in st.session_state:
         with st.spinner('Wait for it...'):
             response_text = requestURL("http://192.168.41.111:6011/uploadDocument-Google/back/", st.session_state['uploaded_back'])
+            if 'status' in response_text:
+                st.error(response_text['message'])
+                return
             st.session_state['google_back_ocr'] = response_text
         if response_text['CardValidation'] is False:
             st.error("Citizenship Front is not valid. Try again")
@@ -259,7 +271,6 @@ def main():
         home_tab()
     elif selected_tab == "Front OCR":
         uploaded_front = st.session_state.get("uploaded_front")
-        print(uploaded_front.name)
         if uploaded_front is None :
             st.error("Please upload both the citizenship front and back.")
         else:
@@ -284,9 +295,5 @@ def main():
             tab5(uploaded_back)
 
 if __name__ == "__main__":
-    # st.session_state['front_ocr'] = None
-    # st.session_state['back_ocr'] = None
-    # st.session_state['google_front_ocr'] = None
-    # st.session_state['google_back_ocr'] = None
     main()
     
