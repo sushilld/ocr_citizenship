@@ -1,3 +1,5 @@
+import json
+import argparse
 import pandas as pd
 import streamlit as st
 from request_ocr import requestURL
@@ -15,6 +17,11 @@ def home_tab():
             st.write("Front and back of citizenship uploaded successfully!")
             st.image(uploaded_front)
             st.image(uploaded_back)
+            try:
+                del st.session_state['front_ocr']
+                del st.session_state['back_ocr']
+            except:
+                pass
             st.warning("Please switch to other tabs.")
         else:
             st.error("Please upload both the citizenship front and back.")
@@ -25,13 +32,16 @@ def tab2(uploaded_front):
 
     if 'front_ocr' not in st.session_state:
         with st.spinner('Wait for it...'):
-            response_text = requestURL("http://192.168.41.111:6011/uploadDocument/front/", st.session_state['uploaded_front'])
+            response_text = requestURL(f"http://{ip_address}:{ip_port}/uploadDocument/front/", st.session_state['uploaded_front'])
             if 'status' in response_text:
-                st.error(response_text['message'])
+                st.error(response_text['message'], icon='🚨')
+                st.image('./imgngif/not-sure-if-50a6308be8.jpg', width=800)
                 return
             st.session_state['front_ocr'] = response_text
         if response_text['CardValidation'] is False:
             st.error("Citizenship Front is not valid. Try again")
+            st.image("./imgngif/fake-ids-v7tzde.jpg")
+            return
     else:
         response_text = st.session_state['front_ocr']
     citizenship_number = response_text['Info']['CitizenshipNumber']
@@ -51,6 +61,14 @@ def tab2(uploaded_front):
         st.subheader("Citizenship OCR finding with :blue[fields]")
         
         with st.container():
+            if 'District' not in birthplace:
+                birthplace['District'] = ''
+            if 'WardNumber' not in birthplace:
+                birthplace['WardNumber'] = ''
+            if 'District' not in permanent_address:
+                permanent_address['District'] = ''
+            if 'WardNumber' not in permanent_address:
+                permanent_address['WardNumber'] = ''
             data = {
                 "CitizenshipNumber": [citizenship_number],
                 "FullName": [name],
@@ -61,7 +79,7 @@ def tab2(uploaded_front):
                 "BirthPlace_District": [birthplace['District']],
                 "BirthPlace_WardNumber": [birthplace['WardNumber']],
                 "PermanentAddress_District": [permanent_address['District']],
-                "PermanentAddress_WardNumber": [permanent_address['WardNumber']]
+                "PermanentAddress_WardNumber": [permanent_address['WardNumber']],
             }
 
             df = pd.DataFrame(data)
@@ -83,13 +101,16 @@ def tab3(uploaded_back):
     # if st.session_state['back_ocr'] == None:
     if 'back_ocr' not in st.session_state:
         with st.spinner('Wait for it...'):
-            response_text = requestURL("http://192.168.41.111:6011/uploadDocument/back/", st.session_state['uploaded_back'])
+            response_text = requestURL(f"http://{ip_address}:{ip_port}/uploadDocument/back/", st.session_state['uploaded_back'])
             if 'status' in response_text:
                 st.error(response_text['message'])
+                st.image('./imgngif/not-sure-if-50a6308be8.jpg', width=800)
                 return
             st.session_state['back_ocr'] = response_text
         if response_text['CardValidation'] is False:
             st.error("Citizenship Back is not valid. Try again")
+            st.image('./imgngif/not-sure-if-50a6308be8.jpg', width=800)
+            return
     else:
         response_text = st.session_state['back_ocr']
     # Add the image to the first column
@@ -99,8 +120,8 @@ def tab3(uploaded_back):
     birthdate = response_text['Info']['BirthDate']
     birthplace = response_text['Info']['BirthPlace']
     permanent_address = response_text['Info']['PermanentAddress']
-    issue_d = response_text['Info']['IssueDate'],
-    finger_print = response_text['FingerPrintStatus']
+    issue_d = response_text['Info']['IssueDate']
+    finger_print = str(response_text['FingerPrintStatus'])
     with col1:
         st.subheader("Citizenship Back View")
         st.image(uploaded_back, use_column_width=True)
@@ -110,17 +131,24 @@ def tab3(uploaded_back):
         st.subheader("Citizenship OCR finding with :blue[fields]")
         
         with st.container():
+            if 'District' not in birthplace:
+                birthplace['District'] = ''
+            if 'WardNumber' not in birthplace:
+                birthplace['WardNumber'] = ''
+            if 'District' not in permanent_address:
+                permanent_address['District'] = ''
+            if 'WardNumber' not in permanent_address:
+                permanent_address['WardNumber'] = ''
             data = {
                 "CitizenshipNumber": [citizenship_number],
                 "FullName": [name],
                 "Gender": [gender],
                 "BirthDate": [birthdate],
                 "BirthPlace_District": [birthplace['District']],
-                # "BirthPlace_Sub-Metropolitan": [birthplace['Sub-Metropolitan']],
                 "BirthPlace_WardNumber": [birthplace['WardNumber']],
                 "PermanentAddress_District": [permanent_address['District']],
                 "PermanentAddress_WardNumber": [permanent_address['WardNumber']],
-                "IssueDate": [''.join(issue_d)],
+                "IssueDate": [issue_d],
                 "FingerPrint": [finger_print]
             }
 
@@ -145,13 +173,16 @@ def tab4(uploaded_front):
     # if st.session_state['google_front_ocr'] == None:
     if 'google_front_ocr' not in st.session_state:
         with st.spinner('Wait for it...'):
-            response_text = requestURL("http://192.168.41.111:6011/uploadDocument-Google/front/", st.session_state['uploaded_front'])
+            response_text = requestURL(f"http://{ip_address}:{ip_port}/uploadDocument-Google/front/", st.session_state['uploaded_front'])
             if 'status' in response_text:
                 st.error(response_text['message'])
+                st.image('./imgngif/not-sure-if-50a6308be8.jpg', width=800)
                 return
             st.session_state['google_front_ocr'] = response_text
         if response_text['CardValidation'] is False:
             st.error("Citizenship Front is not valid. Try again")
+            st.image('./imgngif/fake-ids-v7tzde.jpg', width=800)
+            return
     else:
         response_text = st.session_state['google_front_ocr']
     citizenship_number = response_text['Info']['CitizenshipNumber']
@@ -172,6 +203,14 @@ def tab4(uploaded_front):
         st.subheader("Citizenship OCR finding with :blue[fields]")
         
         with st.container():
+            if 'District' not in birthplace:
+                birthplace['District'] = ''
+            if 'WardNumber' not in birthplace:
+                birthplace['WardNumber'] = ''
+            if 'District' not in permanent_address:
+                permanent_address['District'] = ''
+            if 'WardNumber' not in permanent_address:
+                permanent_address['WardNumber'] = ''
             data = {
                 "CitizenshipNumber": [citizenship_number],
                 "FullName": [name],
@@ -182,7 +221,7 @@ def tab4(uploaded_front):
                 "BirthPlace_District": [birthplace['District']],
                 "BirthPlace_WardNumber": [birthplace['WardNumber']],
                 "PermanentAddress_District": [permanent_address['District']],
-                "PermanentAddress_WardNumber": [permanent_address['WardNumber']]
+                "PermanentAddress_WardNumber": [permanent_address['WardNumber']],
             }
 
             df = pd.DataFrame(data)
@@ -205,13 +244,16 @@ def tab5(uploaded_back):
     # if st.session_state['google_back_ocr'] == None:
     if 'google_back_ocr' not in st.session_state:
         with st.spinner('Wait for it...'):
-            response_text = requestURL("http://192.168.41.111:6011/uploadDocument-Google/back/", st.session_state['uploaded_back'])
+            response_text = requestURL(f"http://{ip_address}:{ip_port}/uploadDocument-Google/back/", st.session_state['uploaded_back'])
             if 'status' in response_text:
                 st.error(response_text['message'])
+                st.image('./imgngif/not-sure-if-50a6308be8.jpg', width=800)
                 return
             st.session_state['google_back_ocr'] = response_text
         if response_text['CardValidation'] is False:
             st.error("Citizenship Front is not valid. Try again")
+            st.image('./imgngif/not-sure-if-50a6308be8.jpg', width=800)
+            return
     else:
         response_text = st.session_state['google_back_ocr']
     # Add the image to the first column
@@ -239,11 +281,10 @@ def tab5(uploaded_back):
                 "Gender": [gender],
                 "BirthDate": [birthdate],
                 "BirthPlace_District": [birthplace['District']],
-                # "BirthPlace_Sub-Metropolitan": [birthplace['Sub-Metropolitan']],
                 "BirthPlace_WardNumber": [birthplace['WardNumber']],
                 "PermanentAddress_District": [permanent_address['District']],
                 "PermanentAddress_WardNumber": [permanent_address['WardNumber']],
-                "IssueDate": [''.join(issue_d)],
+                "IssueDate": [issue_d],
                 "FingerPrint": [finger_print]
             }
 
@@ -261,10 +302,13 @@ def tab5(uploaded_back):
         st.write(response_text['Info']['ExtractedText'])
 
 # Main app
-def main():
+def main(show_google):
     st.set_page_config(page_title="OCR Citizenship", layout="wide")
     st.sidebar.title("Navigation")
-    tabs = ["Home", "Front OCR", "Back OCR", "Front Google OCR", "Back Google OCR"]
+    if show_google:
+        tabs = ["Home", "Front OCR", "Back OCR", "Front Google OCR", "Back Google OCR"]
+    else:
+        tabs = ["Home", "Front OCR", "Back OCR"]
     selected_tab = st.sidebar.radio("Go to", tabs)
     
     if selected_tab == "Home":
@@ -295,5 +339,40 @@ def main():
             tab5(uploaded_back)
 
 if __name__ == "__main__":
-    main()
-    
+    try:
+        global ip_address
+        global ip_port
+        with open('config.json') as f:
+            data = json.load(f)
+        ip_address = data['ip_address']
+        ip_port = data['ip_port']
+        show_google = data['show_google']
+        # print(ip_address, ip_port)
+        main(show_google)
+    except Exception as e:
+        st.error("Something went wrong. Please try again.")
+        try:
+            del st.session_state['uploaded_front']
+        except:
+            pass
+        try:
+            del st.session_state['uploaded_back']
+        except:
+            pass
+        try:
+            del st.session_state['google_front_ocr']
+        except:
+            pass
+        try:
+            del st.session_state['google_back_ocr']
+        except:
+            pass
+        try:
+            del st.session_state['front_ocr']
+        except:
+            pass
+        try:
+            del st.session_state['back_ocr']
+        except:
+            pass
+        # print(e)

@@ -14,5 +14,6 @@ def requestURL(url, image):
         response = requests.post(url, headers=headers, data=payload, files=files)
         response_text = response.json()
     except:
-        response_text = {'status': 'error', 'message': 'OCR Server is down. Try again later.'}
+        response_text = {'status': 'error', 'message': 'OCR Server is down. Try again later.', 'info': None}
+    # print(response_text)
     return response_text
