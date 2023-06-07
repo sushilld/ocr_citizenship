@@ -28,7 +28,10 @@ def home_tab():
 def tab2(uploaded_front):
     st.header("Uploaded Front OCR")
     col1, col2 = st.columns(2, gap="large")
-
+    if 'front_ocr' in st.session_state and st.session_state['front_ocr']['CardValidation'] is False:
+        st.error("Citizenship Front is not valid. Try again")
+        st.image('./imgngif/fake-ids-v7tzde.jpg', width=800)
+        return
     if 'front_ocr' not in st.session_state:
         with st.spinner('Wait for it...'):
             response_text = requestURL(f"http://{ip_address}:{ip_port}/uploadDocument/front/", st.session_state['uploaded_front'])
@@ -170,6 +173,10 @@ def tab4(uploaded_front):
     st.header("Uploaded Front OCR")
     col1, col2 = st.columns(2, gap="large")
     # if st.session_state['google_front_ocr'] == None:
+    if 'front_ocr' in st.session_state and st.session_state['front_ocr']['CardValidation'] is False:
+        st.error("Citizenship Front is not valid. Try again")
+        st.image('./imgngif/fake-ids-v7tzde.jpg', width=800)
+        return
     if 'google_front_ocr' not in st.session_state:
         with st.spinner('Wait for it...'):
             response_text = requestURL(f"http://{ip_address}:{ip_port}/uploadDocument-Google/front/", st.session_state['uploaded_front'])

@@ -1,7 +1,6 @@
 import requests
 
 def requestURL(url, image):
-    # url = "http://192.168.41.111:6011/uploadDocument/front/"
     print('Request Received')
     payload = {}
     files = {
