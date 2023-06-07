@@ -1,14 +1,19 @@
-FROM python:3.10
+# Base image
+FROM python:3.9-slim
 
-# set a directory for the app
+# Set the working directory inside the container
 WORKDIR /app
 
-COPY requirements.txt /app/requirements.txt
-COPY config.json /app/config.json
+RUN pip install --upgrade pip
 
-COPY startup.sh /app/startup.sh
-RUN chmod +x /app/startup.sh
+COPY ./requirements.txt /app
 
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy the app files to the container
 ADD ./app /app
+
+EXPOSE 8501
+
+# Set the entrypoint command
+CMD ["streamlit", "run", "app.py","--"]
