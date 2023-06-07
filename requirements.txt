@@ -1,6 +1,6 @@
 extra_streamlit_components==0.1.56
 pandas==2.0.2
-PyJWT==2.7.0
-python_bcrypt==0.3.2
-PyYAML==6.0
+PyJWT >=2.3.0
+bcrypt >= 3.1.7
+PyYAML >= 5.3.1
 streamlit==1.23.1

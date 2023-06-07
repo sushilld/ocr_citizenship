@@ -34,6 +34,8 @@ def login():
         # creating a login widget
         name, authentication_status, username = authenticator.login(
             'Login', 'main')
+
+        # creating register button
         if authentication_status:
             authenticator.logout('Logout', 'main')
             st.write(f'Welcome *{name}*')
