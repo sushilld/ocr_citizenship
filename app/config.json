@@ -1,5 +1,5 @@
 {
     "ip_address": "192.168.41.111",
     "ip_port": "6011",
-    "show_google": true
+    "show_google": "true"
 }

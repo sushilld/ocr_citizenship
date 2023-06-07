@@ -305,7 +305,7 @@ def tab5(uploaded_back):
 def main(show_google):
     st.set_page_config(page_title="OCR Citizenship", layout="wide")
     st.sidebar.title("Navigation")
-    if show_google:
+    if show_google == 'true':
         tabs = ["Home", "Front OCR", "Back OCR", "Front Google OCR", "Back Google OCR"]
     else:
         tabs = ["Home", "Front OCR", "Back OCR"]
@@ -342,32 +342,32 @@ if __name__ == "__main__":
     try:
         global ip_address
         global ip_port
-        # Parse command-line arguments
-        parser = argparse.ArgumentParser()
-        parser.add_argument("--ip_address", help="IP address")
-        parser.add_argument("--ip_port", help="IP port")
-        parser.add_argument("--show_google", help="Show Google")
+        # # Parse command-line arguments
+        # parser = argparse.ArgumentParser()
+        # parser.add_argument("--ip_address", help="IP address")
+        # parser.add_argument("--ip_port", help="IP port")
+        # parser.add_argument("--show_google", help="Show Google")
 
-        args = parser.parse_args()
+        # args = parser.parse_args()
 
-        # Read the config.json file
-        config_path = "./config.json"
-        with open(config_path, "r") as config_file:
-            config_data = json.load(config_file)
+        # # Read the config.json file
+        # config_path = "./config.json"
+        # with open(config_path, "r") as config_file:
+        #     config_data = json.load(config_file)
 
-        # Update the config values with command-line arguments
-        print(args.ip_address, args.ip_port, args.show_google)
+        # # Update the config values with command-line arguments
+        # print(args.ip_address, args.ip_port, args.show_google)
         
-        if args.ip_address:
-            config_data["ip_address"] = args.ip_address
-        if args.ip_port:
-            config_data["ip_port"] = args.ip_port
-        if args.show_google:
-            config_data["show_google"] = args.show_google
+        # if args.ip_address:
+        #     config_data["ip_address"] = args.ip_address
+        # if args.ip_port:
+        #     config_data["ip_port"] = args.ip_port
+        # if args.show_google:
+        #     config_data["show_google"] = args.show_google
 
-        # Write the updated config.json file
-        with open(config_path, "w") as config_file:
-            json.dump(config_data, config_file, indent=4)
+        # # Write the updated config.json file
+        # with open(config_path, "w") as config_file:
+        #     json.dump(config_data, config_file, indent=4)
         with open('./config.json') as f:
             data = json.load(f)
         ip_address = data['ip_address']

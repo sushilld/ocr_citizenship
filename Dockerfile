@@ -4,7 +4,7 @@ FROM python:3.9-slim
 # Set the working directory inside the container
 WORKDIR /app
 
-RUN pip install --upgrade pip
+RUN apt-get update && apt-get install -y jq
 
 COPY ./requirements.txt /app
 
@@ -15,5 +15,8 @@ ADD ./app /app
 
 EXPOSE 8501
 
-# Set the entrypoint command
-CMD ["streamlit", "run", "app.py","--"]
+COPY ./config.sh /app
+
+RUN chmod +x ./config.sh
+
+CMD ["./config.sh"]
