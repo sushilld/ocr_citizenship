@@ -3,6 +3,7 @@ import pandas as pd
 import streamlit as st
 from request_ocr import requestURL
 
+import traceback
 import yaml
 import streamlit as st
 from yaml.loader import SafeLoader
@@ -15,8 +16,8 @@ _RELEASE = False
 
 
 def login():
-    st.beta_set_page_config(page_title='Login Page',
-                            layout='narrow', initial_sidebar_state='auto')
+    # st.beta_set_page_config(page_title='Login Page',
+    #                         layout='narrow', initial_sidebar_state='auto')
     if not _RELEASE:
         with open('config.yaml') as file:
             config = yaml.load(file, Loader=SafeLoader)
@@ -435,4 +436,4 @@ if __name__ == "__main__":
             del st.session_state['back_ocr']
         except:
             pass
-        print(e)
+        traceback.print_exc()
