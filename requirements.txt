@@ -1,3 +1,6 @@
-pandas==1.5.3
-requests==2.25.1
-streamlit==1.20.0
+extra_streamlit_components==0.1.56
+pandas==2.0.2
+PyJWT==2.7.0
+python_bcrypt==0.3.2
+PyYAML==6.0
+streamlit==1.23.1

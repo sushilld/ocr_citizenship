@@ -1,0 +1,13 @@
+cookie:
+  expiry_days: 30
+  key: random_signature_key
+  name: random_cookie_name
+credentials:
+  usernames:
+    sujen1:
+      email: kneel.stha@gmail.com
+      name: sujen shrestha
+      password: $2b$12$DnyEgpFmLtlE99D9j4WbgOCQhAYTHtpvVLt/ATvQ.b0CI2MPjo5f2
+preauthorized:
+  emails:
+  - sushil@gmail.com
