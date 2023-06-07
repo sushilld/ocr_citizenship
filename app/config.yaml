@@ -10,4 +10,4 @@ credentials:
       password: $2b$12$DnyEgpFmLtlE99D9j4WbgOCQhAYTHtpvVLt/ATvQ.b0CI2MPjo5f2
 preauthorized:
   emails:
-    - sushil@gmail.com
+  - sushil@gmail.com

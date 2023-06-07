@@ -35,7 +35,6 @@ def login():
         name, authentication_status, username = authenticator.login(
             'Login', 'main')
 
-        # creating register button
         if authentication_status:
             authenticator.logout('Logout', 'main')
             st.write(f'Welcome *{name}*')
@@ -44,6 +43,19 @@ def login():
             st.error('Username/password is incorrect')
         elif authentication_status is None:
             st.warning('Please enter your username and password')
+
+        # creating register button
+        st.caption('New to system Register')
+        if st.button('Register New User'):
+            try:
+                if authenticator.register_user('Register user', preauthorization=False):
+                    st.success('User registered successfully')
+            except Exception as e:
+                st.error(e)
+
+        # saving config file
+        with open('config.yaml', 'w') as file:
+            yaml.dump(config, file, default_flow_style=False)
 
 
 def home_tab():
