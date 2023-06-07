@@ -1,5 +1,4 @@
 import json
-import argparse
 import pandas as pd
 import streamlit as st
 from request_ocr import requestURL
