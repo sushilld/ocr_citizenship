@@ -15,6 +15,8 @@ _RELEASE = False
 
 
 def login():
+    st.beta_set_page_config(page_title='Login Page',
+                            layout='narrow', initial_sidebar_state='auto')
     if not _RELEASE:
         with open('config.yaml') as file:
             config = yaml.load(file, Loader=SafeLoader)
@@ -33,8 +35,9 @@ def login():
             'Login', 'main')
 
         if authentication_status:
-            authenticator.logout('Logout', 'main')
             st.write(f'Welcome *{name}*')
+            authenticator.logout('Logout', 'main')
+
             return True
         elif authentication_status is False:
             st.error('Username/password is incorrect')
