@@ -44,19 +44,6 @@ def login():
         elif authentication_status is None:
             st.warning('Please enter your username and password')
 
-        # creating register button
-        st.caption('New to system Register')
-        if st.button('Register New User'):
-            try:
-                if authenticator.register_user('Register user', preauthorization=False):
-                    st.success('User registered successfully')
-            except Exception as e:
-                st.error(e)
-
-        # saving config file
-        with open('config.yaml', 'w') as file:
-            yaml.dump(config, file, default_flow_style=False)
-
 
 def home_tab():
     st.title("OCR Citizenship")
@@ -374,10 +361,7 @@ def tab5(uploaded_back):
 
 def main(show_google):
     st.set_page_config(page_title="OCR Citizenship", layout="wide")
-    success = False
     if login():
-        success = True
-    if success:
         st.sidebar.title("Navigation")
         if show_google == 'true':
             tabs = ["Home", "Front OCR", "Back OCR",
