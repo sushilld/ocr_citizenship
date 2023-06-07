@@ -14,7 +14,31 @@ from authenticate import Authenticate
 _RELEASE = False
 
 
+def register(authenticator):
+    breakpoint()
+    # registering user
+    try:
+        authentication_status, username = authenticator.register_user(
+            'Register user', 'main', preauthorization=False)
+
+    except Exception as e:
+        st.error(e)
+    # Creating an update user details widget
+    if authentication_status:
+        try:
+            if authenticator.update_user_details(username, 'Update user details'):
+                st.success('Entries updated successfully')
+        except Exception as e:
+            st.error(e)
+
+    # Saving config file
+    with open('config.yaml', 'w') as file:
+        yaml.dump(config, file, default_flow_style=False)
+
+
 def login():
+    st.beta_set_page_config(page_title='Login Page',
+                            layout='narrow', initial_sidebar_state='auto')
     if not _RELEASE:
         # hashed_passwords = Hasher(['sujen123', 'admin']).generate()
 
@@ -36,8 +60,9 @@ def login():
             'Login', 'main')
 
         if authentication_status:
-            authenticator.logout('Logout', 'main')
             st.write(f'Welcome *{name}*')
+            authenticator.logout('Logout', 'main')
+
             return True
         elif authentication_status is False:
             st.error('Username/password is incorrect')
