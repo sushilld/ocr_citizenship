@@ -3,6 +3,7 @@ import pandas as pd
 import streamlit as st
 from request_ocr import requestURL
 
+import traceback
 import yaml
 import streamlit as st
 from yaml.loader import SafeLoader
@@ -44,6 +45,11 @@ def login():
 
 
 def home_tab():
+    """
+    Displays the home tab for the OCR Citizenship app.
+
+    This tab allows users to upload the front and back images of a citizenship document.
+    """
     st.title("OCR Citizenship")
     st.header("Welcome to the OCR Citizenship app!")
     uploaded_front = st.file_uploader(
@@ -69,6 +75,14 @@ def home_tab():
 
 
 def tab2(uploaded_front):
+    """
+    Displays the second tab for the OCR Citizenship app.
+
+    This tab shows the uploaded front OCR details and extracted text from the image.
+
+    Args:
+        uploaded_front: The uploaded front image of the citizenship document.
+    """
     st.header("Uploaded Front OCR")
     col1, col2 = st.columns(2, gap="large")
     if 'front_ocr' in st.session_state and st.session_state['front_ocr']['CardValidation'] is False:
@@ -143,6 +157,14 @@ def tab2(uploaded_front):
 
 
 def tab3(uploaded_back):
+    """
+    Displays the third tab for the OCR Citizenship app.
+
+    This tab shows the uploaded back OCR details and extracted text from the image.
+
+    Args:
+        uploaded_back: The uploaded back image of the citizenship document.
+    """
     st.header("Uploaded Back OCR")
     col1, col2 = st.columns(2, gap="large")
     # if st.session_state['back_ocr'] == None:
@@ -215,6 +237,14 @@ def tab3(uploaded_back):
 
 
 def tab4(uploaded_front):
+    """
+    Displays the fourth tab for the OCR Citizenship app.
+
+    This tab shows the uploaded front OCR details and extracted text from the image.
+
+    Args:
+        uploaded_front: The uploaded front image of the citizenship document.
+    """
     st.header("Uploaded Front OCR")
     col1, col2 = st.columns(2, gap="large")
     # if st.session_state['google_front_ocr'] == None:
@@ -291,6 +321,14 @@ def tab4(uploaded_front):
 
 
 def tab5(uploaded_back):
+    """
+    Displays the fifth tab for the OCR Citizenship app.
+
+    This tab shows the uploaded back OCR details and extracted text from the image.
+
+    Args:
+        uploaded_back: The uploaded back image of the citizenship document.
+    """
     st.header("Uploaded back OCR")
     col1, col2 = st.columns(2, gap="large")
     # if st.session_state['google_back_ocr'] == None:
@@ -320,7 +358,7 @@ def tab5(uploaded_back):
     finger_print = response_text['FingerPrintStatus']
 
     with col1:
-        st.subheader("Citizenship Front View")
+        st.subheader("Citizenship Back View")
         st.image(uploaded_back, use_column_width=True)
 
     # Add the description to the second column
@@ -358,6 +396,19 @@ def tab5(uploaded_back):
 
 
 def main(show_google):
+    '''# Main Function
+            The `main` function is the entry point of the application. It sets the page configuration, checks for login status, and displays a sidebar for navigation based on the `show_google` variable. The available tabs depend on the value of `show_google`. The selected tab determines which function is called to display the content.
+            ## Tab: Home
+            The home tab displays the main content of the application.
+            ## Tab: Front OCR
+            If the "Front OCR" tab is selected, it checks if the citizenship front image has been uploaded. If not, it displays an error message. Otherwise, it calls the `tab2` function to process and display the OCR results for the front image.
+            ## Tab: Back OCR
+            If the "Back OCR" tab is selected, it checks if the citizenship back image has been uploaded. If not, it displays an error message. Otherwise, it calls the `tab3` function to process and display the OCR results for the back image.
+            ## Tab: Front Google OCR
+            If the "Front Google OCR" tab is selected, it checks if the citizenship front image has been uploaded. If not, it displays an error message. Otherwise, it calls the `tab4` function to process and display the Google OCR results for the front image.
+            ## Tab: Back Google OCR
+            If the "Back Google OCR" tab is selected, it checks if the citizenship back image has been uploaded. If not, it displays an error message. Otherwise, it calls the `tab5` function to process and display the Google OCR results for the back image.
+'''
     st.set_page_config(page_title="OCR Citizenship", layout="wide")
     if login():
         st.sidebar.title("Navigation")
@@ -397,35 +448,13 @@ def main(show_google):
 
 
 if __name__ == "__main__":
+    '''
+            # Execution
+            The code block below checks if the script is being run as the main module. It loads the IP address, IP port, and other configuration details from the `config.json` file. It then calls the `main` function, passing the `show_google` value. If an exception occurs, it displays an error message and clears the session state.
+    '''
     try:
         global ip_address
         global ip_port
-        # # Parse command-line arguments
-        # parser = argparse.ArgumentParser()
-        # parser.add_argument("--ip_address", help="IP address")
-        # parser.add_argument("--ip_port", help="IP port")
-        # parser.add_argument("--show_google", help="Show Google")
-
-        # args = parser.parse_args()
-
-        # # Read the config.json file
-        # config_path = "./config.json"
-        # with open(config_path, "r") as config_file:
-        #     config_data = json.load(config_file)
-
-        # # Update the config values with command-line arguments
-        # print(args.ip_address, args.ip_port, args.show_google)
-
-        # if args.ip_address:
-        #     config_data["ip_address"] = args.ip_address
-        # if args.ip_port:
-        #     config_data["ip_port"] = args.ip_port
-        # if args.show_google:
-        #     config_data["show_google"] = args.show_google
-
-        # # Write the updated config.json file
-        # with open(config_path, "w") as config_file:
-        #     json.dump(config_data, config_file, indent=4)
         with open('./config.json') as f:
             data = json.load(f)
         ip_address = data['ip_address']
@@ -459,4 +488,4 @@ if __name__ == "__main__":
             del st.session_state['back_ocr']
         except:
             pass
-        print(e)
+        traceback.print_exc()
