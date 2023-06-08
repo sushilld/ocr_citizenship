@@ -15,12 +15,7 @@ _RELEASE = False
 
 
 def login():
-    st.beta_set_page_config(page_title='Login Page',
-                            layout='narrow', initial_sidebar_state='auto')
     if not _RELEASE:
-        # hashed_passwords = Hasher(['sujen123', 'admin']).generate()
-
-        # Loading config file
         with open('config.yaml') as file:
             config = yaml.load(file, Loader=SafeLoader)
 
