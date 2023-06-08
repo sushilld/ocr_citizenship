@@ -16,12 +16,6 @@ _RELEASE = False
 
 
 def login():
-    """
-    Displays a login form and authenticates the user.
-
-    Returns:
-        bool: True if authentication is successful, False otherwise.
-    """
     if not _RELEASE:
         with open('config.yaml') as file:
             config = yaml.load(file, Loader=SafeLoader)
