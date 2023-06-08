@@ -3,6 +3,7 @@ import pandas as pd
 import streamlit as st
 from request_ocr import requestURL
 
+import traceback
 import yaml
 import streamlit as st
 from yaml.loader import SafeLoader
@@ -22,9 +23,6 @@ def login():
         bool: True if authentication is successful, False otherwise.
     """
     if not _RELEASE:
-        # hashed_passwords = Hasher(['sujen123', 'admin']).generate()
-
-        # Loading config file
         with open('config.yaml') as file:
             config = yaml.load(file, Loader=SafeLoader)
 
@@ -42,8 +40,9 @@ def login():
             'Login', 'main')
 
         if authentication_status:
-            authenticator.logout('Logout', 'main')
             st.write(f'Welcome *{name}*')
+            authenticator.logout('Logout', 'main')
+
             return True
         elif authentication_status is False:
             st.error('Username/password is incorrect')
@@ -495,4 +494,4 @@ if __name__ == "__main__":
             del st.session_state['back_ocr']
         except:
             pass
-        print(e)
+        traceback.print_exc()
