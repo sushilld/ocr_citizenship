@@ -66,6 +66,7 @@ def home_tab():
                 pass
             st.warning("Please switch to other tabs.")
         else:
+            st.image('./imgngif/7orve2.jpg', width=800)
             st.error("Please upload both the citizenship front and back.")
 
 
