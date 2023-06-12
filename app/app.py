@@ -118,7 +118,7 @@ def tab2(uploaded_front):
                 "FatherName": [father_name],
                 "MotherName": [mother_name],
             }
-            
+
             if 'District' in birthplace:
                 data["BirthPlace_District"] = [birthplace['District']]
 
@@ -126,7 +126,8 @@ def tab2(uploaded_front):
                 data["BirthPlace_WardNumber"] = [birthplace['WardNumber']]
 
             if 'Sub-Metropolitan' in birthplace:
-                data["BirthPlace_SubMetropolitan"] = [birthplace['Sub-Metropolitan']]
+                data["BirthPlace_SubMetropolitan"] = [
+                    birthplace['Sub-Metropolitan']]
 
             if 'Metropolitan' in birthplace:
                 data["BirthPlace_Metropolitan"] = [birthplace['Metropolitan']]
@@ -138,23 +139,27 @@ def tab2(uploaded_front):
                 data["BirthPlace_Municipality"] = [birthplace['Municipality']]
 
             if 'District' in permanent_address:
-                data["PermanentAddress_District"] = [permanent_address['District']]
+                data["PermanentAddress_District"] = [
+                    permanent_address['District']]
 
             if 'WardNumber' in permanent_address:
-                data["PermanentAddress_WardNumber"] = [permanent_address['WardNumber']]
+                data["PermanentAddress_WardNumber"] = [
+                    permanent_address['WardNumber']]
 
             if 'Sub-Metropolitan' in permanent_address:
-                data["PermanentAddress_SubMetropolitan"] = [permanent_address['Sub-Metropolitan']]
+                data["PermanentAddress_SubMetropolitan"] = [
+                    permanent_address['Sub-Metropolitan']]
 
             if 'Metropolitan' in permanent_address:
-                data["PermanentAddress_Metropolitan"] = [permanent_address['Metropolitan']]
+                data["PermanentAddress_Metropolitan"] = [
+                    permanent_address['Metropolitan']]
 
             if 'VDC' in permanent_address:
                 data["PermanentAddress_VDC"] = [permanent_address['VDC']]
 
             if 'Municipality' in permanent_address:
-                data["PermanentAddress_Municipality"] = [permanent_address['Municipality']]
-
+                data["PermanentAddress_Municipality"] = [
+                    permanent_address['Municipality']]
 
             df = pd.DataFrame(data)
             df = df.reset_index(drop=True)
@@ -215,7 +220,7 @@ def tab3(uploaded_back):
                 "IssueDate": [issue_d],
                 "FingerPrint": [finger_print]
             }
-            
+
             if 'District' in birthplace:
                 data["BirthPlace_District"] = [birthplace['District']]
 
@@ -223,7 +228,8 @@ def tab3(uploaded_back):
                 data["BirthPlace_WardNumber"] = [birthplace['WardNumber']]
 
             if 'Sub-Metropolitan' in birthplace:
-                data["BirthPlace_SubMetropolitan"] = [birthplace['Sub-Metropolitan']]
+                data["BirthPlace_SubMetropolitan"] = [
+                    birthplace['Sub-Metropolitan']]
 
             if 'Metropolitan' in birthplace:
                 data["BirthPlace_Metropolitan"] = [birthplace['Metropolitan']]
@@ -235,23 +241,28 @@ def tab3(uploaded_back):
                 data["BirthPlace_Municipality"] = [birthplace['Municipality']]
 
             if 'District' in permanent_address:
-                data["PermanentAddress_District"] = [permanent_address['District']]
+                data["PermanentAddress_District"] = [
+                    permanent_address['District']]
 
             if 'WardNumber' in permanent_address:
-                data["PermanentAddress_WardNumber"] = [permanent_address['WardNumber']]
+                data["PermanentAddress_WardNumber"] = [
+                    permanent_address['WardNumber']]
 
             if 'Sub-Metropolitan' in permanent_address:
-                data["PermanentAddress_SubMetropolitan"] = [permanent_address['Sub-Metropolitan']]
+                data["PermanentAddress_SubMetropolitan"] = [
+                    permanent_address['Sub-Metropolitan']]
 
             if 'Metropolitan' in permanent_address:
-                data["PermanentAddress_Metropolitan"] = [permanent_address['Metropolitan']]
+                data["PermanentAddress_Metropolitan"] = [
+                    permanent_address['Metropolitan']]
 
             if 'VDC' in permanent_address:
                 data["PermanentAddress_VDC"] = [permanent_address['VDC']]
 
             if 'Municipality' in permanent_address:
-                data["PermanentAddress_Municipality"] = [permanent_address['Municipality']]
-            
+                data["PermanentAddress_Municipality"] = [
+                    permanent_address['Municipality']]
+
             df = pd.DataFrame(data)
             df = df.reset_index(drop=True)
             df.index = ["Values"]
@@ -315,7 +326,7 @@ def tab4(uploaded_front):
                 "FatherName": [father_name],
                 "MotherName": [mother_name],
             }
-            
+
             if 'District' in birthplace:
                 data["BirthPlace_District"] = [birthplace['District']]
 
@@ -323,7 +334,8 @@ def tab4(uploaded_front):
                 data["BirthPlace_WardNumber"] = [birthplace['WardNumber']]
 
             if 'Sub-Metropolitan' in birthplace:
-                data["BirthPlace_SubMetropolitan"] = [birthplace['Sub-Metropolitan']]
+                data["BirthPlace_SubMetropolitan"] = [
+                    birthplace['Sub-Metropolitan']]
 
             if 'Metropolitan' in birthplace:
                 data["BirthPlace_Metropolitan"] = [birthplace['Metropolitan']]
@@ -335,23 +347,28 @@ def tab4(uploaded_front):
                 data["BirthPlace_Municipality"] = [birthplace['Municipality']]
 
             if 'District' in permanent_address:
-                data["PermanentAddress_District"] = [permanent_address['District']]
+                data["PermanentAddress_District"] = [
+                    permanent_address['District']]
 
             if 'WardNumber' in permanent_address:
-                data["PermanentAddress_WardNumber"] = [permanent_address['WardNumber']]
+                data["PermanentAddress_WardNumber"] = [
+                    permanent_address['WardNumber']]
 
             if 'Sub-Metropolitan' in permanent_address:
-                data["PermanentAddress_SubMetropolitan"] = [permanent_address['Sub-Metropolitan']]
+                data["PermanentAddress_SubMetropolitan"] = [
+                    permanent_address['Sub-Metropolitan']]
 
             if 'Metropolitan' in permanent_address:
-                data["PermanentAddress_Metropolitan"] = [permanent_address['Metropolitan']]
+                data["PermanentAddress_Metropolitan"] = [
+                    permanent_address['Metropolitan']]
 
             if 'VDC' in permanent_address:
                 data["PermanentAddress_VDC"] = [permanent_address['VDC']]
 
             if 'Municipality' in permanent_address:
-                data["PermanentAddress_Municipality"] = [permanent_address['Municipality']]
-                
+                data["PermanentAddress_Municipality"] = [
+                    permanent_address['Municipality']]
+
             df = pd.DataFrame(data)
             df = df.reset_index(drop=True)
             df.index = ["Values"]
@@ -412,7 +429,7 @@ def tab5(uploaded_back):
                 "IssueDate": [issue_d],
                 "FingerPrint": [finger_print]
             }
-            
+
             if 'District' in birthplace:
                 data["BirthPlace_District"] = [birthplace['District']]
 
@@ -420,7 +437,8 @@ def tab5(uploaded_back):
                 data["BirthPlace_WardNumber"] = [birthplace['WardNumber']]
 
             if 'Sub-Metropolitan' in birthplace:
-                data["BirthPlace_SubMetropolitan"] = [birthplace['Sub-Metropolitan']]
+                data["BirthPlace_SubMetropolitan"] = [
+                    birthplace['Sub-Metropolitan']]
 
             if 'Metropolitan' in birthplace:
                 data["BirthPlace_Metropolitan"] = [birthplace['Metropolitan']]
@@ -432,23 +450,28 @@ def tab5(uploaded_back):
                 data["BirthPlace_Municipality"] = [birthplace['Municipality']]
 
             if 'District' in permanent_address:
-                data["PermanentAddress_District"] = [permanent_address['District']]
+                data["PermanentAddress_District"] = [
+                    permanent_address['District']]
 
             if 'WardNumber' in permanent_address:
-                data["PermanentAddress_WardNumber"] = [permanent_address['WardNumber']]
+                data["PermanentAddress_WardNumber"] = [
+                    permanent_address['WardNumber']]
 
             if 'Sub-Metropolitan' in permanent_address:
-                data["PermanentAddress_SubMetropolitan"] = [permanent_address['Sub-Metropolitan']]
+                data["PermanentAddress_SubMetropolitan"] = [
+                    permanent_address['Sub-Metropolitan']]
 
             if 'Metropolitan' in permanent_address:
-                data["PermanentAddress_Metropolitan"] = [permanent_address['Metropolitan']]
+                data["PermanentAddress_Metropolitan"] = [
+                    permanent_address['Metropolitan']]
 
             if 'VDC' in permanent_address:
                 data["PermanentAddress_VDC"] = [permanent_address['VDC']]
 
             if 'Municipality' in permanent_address:
-                data["PermanentAddress_Municipality"] = [permanent_address['Municipality']]
-            
+                data["PermanentAddress_Municipality"] = [
+                    permanent_address['Municipality']]
+
             df = pd.DataFrame(data)
             df = df.reset_index(drop=True)
             df.index = ["Values"]
@@ -482,24 +505,29 @@ def main(show_google):
             uploaded_front = st.session_state.get("uploaded_front")
             if uploaded_front is None:
                 st.error("Please upload both the citizenship front and back.")
+                st.image('./imgngif/7orve2.jpg', width=600)
+
             else:
                 tab2(uploaded_front)
         elif selected_tab == "Back OCR":
             uploaded_back = st.session_state.get("uploaded_back")
             if uploaded_back is None:
                 st.error("Please upload both the citizenship front and back.")
+                st.image('./imgngif/7orve2.jpg', width=600)
             else:
                 tab3(uploaded_back)
         elif selected_tab == "Front Google OCR":
             uploaded_front = st.session_state.get("uploaded_front")
             if uploaded_front is None:
                 st.error("Please upload both the citizenship front and back.")
+                st.image('./imgngif/7orve2.jpg', width=600)
             else:
                 tab4(uploaded_front)
         elif selected_tab == "Back Google OCR":
             uploaded_back = st.session_state.get("uploaded_back")
             if uploaded_back is None:
                 st.error("Please upload both the citizenship front and back.")
+                st.image('./imgngif/7orve2.jpg', width=600)
             else:
                 tab5(uploaded_back)
 
