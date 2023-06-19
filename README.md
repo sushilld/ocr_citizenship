@@ -159,7 +159,7 @@ This project is designed to extract valuable entities from citizenship images. T
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@sushil3125](https://linkedin.com/in/sushil3125) - sushilldhakal25@gmail.com
+Sushil Dhakal - [LinkedIn](https://linkedin.com/in/sushil3125) - sushilldhakal25@gmail.com
 
 Project Link: [https://github.com/sushilld/ocr_citizenship.git](https://github.com/sushilld/ocr_citizenship.git)
 
