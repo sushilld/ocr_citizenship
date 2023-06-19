@@ -41,7 +41,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]]
+![alt text](https://github.com/sushilld/ocr_citizenship/blob/master/app/imgngif/2.png)
 
 The OCR Citizenship is a powerful software program designed to streamline the extraction of valuable entities from citizenship images. Leveraging advanced image processing techniques, Optical Character Recognition (OCR), and Natural Language Processing (NLP) algorithms, this project automates the process of extracting essential information from citizenship documents, reducing manual effort and enhancing efficiency. The user interface and front-end of the system are built using Streamlit, providing a seamless and interactive experience for users.
 
@@ -90,11 +90,21 @@ To get a local copy up and running follow these simple steps.
 
 6. Login using test as username and test as password
 
+![alt text](https://github.com/sushilld/ocr_citizenship/blob/master/app/imgngif/1.png)
+
 7. Upload both of the images of the citizenship (Front and Back)
+
+![alt text](https://github.com/sushilld/ocr_citizenship/blob/master/app/imgngif/2.png)
 
 8. Click on Submit button and you will see a preview of your citienship card.
 
+![alt text](https://github.com/sushilld/ocr_citizenship/blob/master/app/imgngif/3.png)
+![alt text](https://github.com/sushilld/ocr_citizenship/blob/master/app/imgngif/4.png)
+
 9. Navigate to specific tab to see the extracted entities from the image.
+
+![alt text](https://github.com/sushilld/ocr_citizenship/blob/master/app/imgngif/5.png)
+![alt text](https://github.com/sushilld/ocr_citizenship/blob/master/app/imgngif/6.png)
 
 ### Prerequisites
 
