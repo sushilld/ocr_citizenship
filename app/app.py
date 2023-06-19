@@ -85,7 +85,6 @@ def tab2(uploaded_front):
                 st.image('./imgngif/not-sure-if-50a6308be8.jpg', width=800)
                 return
             st.session_state['front_ocr'] = response_text
-        breakpoint()
         if response_text['CardValidation'] is False:
             st.error("Citizenship Front is not valid. Try again")
             st.image("./imgngif/fake-ids-v7tzde.jpg")
