@@ -41,7 +41,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]]
 
 The OCR Citizenship is a powerful software program designed to streamline the extraction of valuable entities from citizenship images. Leveraging advanced image processing techniques, Optical Character Recognition (OCR), and Natural Language Processing (NLP) algorithms, this project automates the process of extracting essential information from citizenship documents, reducing manual effort and enhancing efficiency. The user interface and front-end of the system are built using Streamlit, providing a seamless and interactive experience for users.
 
@@ -51,16 +51,14 @@ The OCR Citizenship is a powerful software program designed to streamline the ex
 
 ### Built With
 
-* [![Python][Python.org]][Python-url]
-* [![Streamlit][Streamlit.io]][Streamlit-url]
-* [![Tensorflow][Tensorflow.org]][Tensorflow-url]
-* [![PyTesseract][PyTesseract.org]][PyTesseract-url]
-* [![OpenCV][OpenCV.org]][OpenCV-url]
-* [![Numpy][Numpy.org]][Numpy-url]
-* [![Pandas][Pandas.org]][Pandas-url]
-* [![Scikit-learn][Scikit-learn.org]][Scikit-learn-url]
-* [![DOCKER][Docker.com]][Docker-url]
-* [![GOOGLE OCR][Google-OCR.com]][Google-OCR-url]
+* Python
+* Tensorflow
+* Tesseract/ PyTesseract
+* Streamlit
+* OpenCV
+* Numpy
+* Docker
+* Google OCR
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -97,7 +95,6 @@ To get a local copy up and running follow these simple steps.
 8. Click on Submit button and you will see a preview of your citienship card.
 
 9. Navigate to specific tab to see the extracted entities from the image.
-   ```
 
 ### Prerequisites
 
